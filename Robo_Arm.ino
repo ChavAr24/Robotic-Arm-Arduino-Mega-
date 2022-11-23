@@ -18,8 +18,24 @@ void loop() {
   // mapping joystick
   x1Map = map(x1, 0, 1023, 0, 255); 
   y1Map = map(y1, 0, 1023, 0, 255);
-  x2Map = map(x2, 0, 1023, 0, 255);
+  x2Map = map(x2, 0, 1024, 0, 500);  // 0, 1023, 0, 255
   y2Map = map(y2, 0, 1023, 0, 255);
   Serial.println((String)" x1: " + x1Map + " | y1: " + y1Map + " | x2: " + x2Map + " | y2: " + y2Map + " | sw1: " + sw1v + " | sw2: " + sw2v + " | sw3: " + sw3v + " | sw4: " + sw4v + " | sw5: " + sw5v + " | sw6: " + sw6v);
-  
+
+
+// Step one revolution in one direction:
+  if (x2Map > 130){
+//    Serial.println("clockwise");
+    myStepper.step(stepsPerRevolution);
+    delay(10);
+  }
+//  
+//  // Step one revolution in the other direction:
+  else if (x2Map < 126){
+//    Serial.println("counterclockwise");
+    myStepper.step(-stepsPerRevolution);
+    delay(10);
+  }
+//  delay(50);
 }
+// try hooking up 12v and increase the speed of the steppper

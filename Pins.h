@@ -1,3 +1,5 @@
+#include <Stepper.h>
+
 #define j1x A0  // Joystick 1 x axis pin 0 = 508 - 514, anything below values of zero is negative direction and anything above is positive direction.
 #define j1y A1  // Joystick 1 y axis pin 0 = 508 - 514, anything below values of zero is negative direction and anything above is positive direction.
 #define j2x A2  // Joystick 2 x axis pin 0 = 514 - 524, anything below values of zero is negative direction and anything above is positive direction.
@@ -8,6 +10,10 @@
 #define sw4 5   // button 4 pin 5
 #define sw5 6   // button 5 pin 6
 #define sw6 7   // button 6 pin 7
+
+const int stepsPerRevolution = 200;  // steps for stepper // 4096 // 2048
+
+Stepper myStepper = Stepper(stepsPerRevolution, 8, 10, 9, 11);
 
 void setup() {
   // put your setup code here, to run once:
@@ -21,6 +27,8 @@ void setup() {
   pinMode(sw4, INPUT);
   pinMode(sw5, INPUT);
   pinMode(sw6, INPUT);
+
+  myStepper.setSpeed(18); //works from 1 - 18// crashes after 18 // 18 is fast enoughfor the base
 
   Serial.begin(9600);
 }
