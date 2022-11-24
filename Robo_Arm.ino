@@ -95,3 +95,5 @@ void loop() {
     delay(10);
   }
 }
+
+// put the motor code in a function
