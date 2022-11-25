@@ -1,4 +1,4 @@
-#include <Stepper.h>
+#include <Servo.h>
 
 #define j1x A0  // Joystick 1 x axis pin 0 = 508 - 514, anything below values of zero is negative direction and anything above is positive direction.
 #define j1y A1  // Joystick 1 y axis pin 0 = 508 - 514, anything below values of zero is negative direction and anything above is positive direction.
@@ -10,16 +10,16 @@
 #define sw4 5   // button 4 pin 5
 #define sw5 6   // button 5 pin 6
 #define sw6 7   // button 6 pin 7
-#define ENL 52 // H-bridge enable pin for speed control (1,2)
-#define ENR 51 // H-bridge enable pin for speed control (3,4)
-#define MC1 53 // H-bridge leg 1
-#define MC2 50 // H-bridge leg 2
-#define MC3 53 // H-bridge leg 3
-#define MC4 50 // H-bridge leg 4
+#define sw7 14  // button 7 pin 14
 
-const int stepsPerRevolution = (320*64) / 100;  // steps for stepper // 4096 // 2048
-
-Stepper myStepper = Stepper(stepsPerRevolution, 8, 10, 9, 11);
+Servo base;     // base
+Servo shoulder; // shoulder
+Servo elbow;    // elbow
+Servo wrist;    // wrist arm joint
+Servo wristrot; // wrist rotation 
+Servo thumb;    // thumb / first finger
+Servo index;    // index / second finger
+Servo midfing;  // third finger
 
 void setup() {
   // put your setup code here, to run once:
@@ -33,15 +33,15 @@ void setup() {
   pinMode(sw4, INPUT);
   pinMode(sw5, INPUT);
   pinMode(sw6, INPUT);
-
-  pinMode(ENL, OUTPUT);
-  pinMode(MC1, OUTPUT);
-  pinMode(MC2, OUTPUT);
-  pinMode(ENR, OUTPUT);
-  pinMode(MC3, OUTPUT);
-  pinMode(MC4, OUTPUT); 
-
-  myStepper.setSpeed(20); //works from 1 - 18// crashes after 18 // 18 is fast enoughfor the base
-
+  pinMode(sw7, INPUT);
+  shoulder.attach(8);
+  elbow.attach(9);
+  wrist.attach(10);
+  wristrot.attach(11);
+  thumb.attach(12);
+  index.attach(13);
+  midfing.attach(15);
+  base.attach(16)
+  
   Serial.begin(9600);
 }
