@@ -2,7 +2,7 @@
 
 int x1Map, y1Map, x2Map, y2Map;  // variable for maping the values from the joystick
 
-int base, shoulder, elbow, wrist;  // variables to store the values after store button is pressed.
+int baseV, shoulderV, elbowV, wristV;  // variables to store the values after store button is pressed.
 
 int mode = 0; // 0 = follow, 1 = learn, 2 = ?
 void loop() {
