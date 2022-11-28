@@ -10,7 +10,7 @@
 #define sw4 5   // button 4 pin 5
 #define sw5 6   // button 5 pin 6
 #define sw6 7   // button 6 pin 7
-#define sw7 14  // button 7 pin 14
+#define sw7 22  // button 7 pin 14
 
 Servo base;     // base
 Servo shoulder; // shoulder
@@ -41,7 +41,7 @@ void setup() {
   thumb.attach(12);
   index.attach(13);
   midfing.attach(15);
-  base.attach(16)
+  base.attach(16);
   
   Serial.begin(9600);
 }

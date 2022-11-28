@@ -5,6 +5,9 @@ int x1Map, y1Map, x2Map, y2Map;  // variable for maping the values from the joys
 int baseV, shoulderV, elbowV, wristV;  // variables to store the values after store button is pressed.
 
 int mode = 0; // 0 = follow, 1 = learn, 2 = ?
+
+bool pressed = false; // boolean to store if button 7 was pressed or not.
+
 void loop() {
   if (sw7 == HIGH){
     if (mode <= 1){
@@ -29,20 +32,44 @@ void loop() {
     int sw6v = digitalRead(sw6);
     int sw7v = digitalRead(sw7);
 
-//    use while loop before mapping.
-    // mapping joystick
+//Mapping Joysticks
     x1Map = map(x1, 0, 1023, 0, 180); 
-    y1Map = map(y1, 0, 1023, 0, 255);
-    x2Map = map(x2, 0, 1023, 0, 255);  // 0, 1023, 0, 255 , 0, 1023, 0, 180
-    y2Map = map(y2, 0, 1023, 0, 255);
-    Serial.println((String)" x1: " + x1Map + " | y1: " + y1Map + " | x2: " + x2Map + " | y2: " + y2Map + " | sw1: " + sw1v + " | sw2: " + sw2v + " | sw3: " + sw3v + " | sw4: " + sw4v + " | sw5: " + sw5v + " | sw6: " + sw6v);
+    y1Map = map(y1, 0, 1023, 0, 180);
+    x2Map = map(x2, 0, 1023, 0, 180);  // 0, 1023, 0, 255 ; 0, 1023, 0, 180
+    y2Map = map(y2, 0, 1023, 0, 180);
+    Serial.println((String)" x1: " + x1Map + " | y1: " + y1Map + " | x2: " + x2Map + " | y2: " + y2Map + " | sw1: " + sw1v + " | sw2: " + sw2v + " | sw3: " + sw3v + " | sw4: " + sw4v + " | sw5: " + sw5v + " | sw6: " + sw6v + " | sw7: " + sw7v);
 
-    base.write(x1Map);
-    shoulder.write(y1Map);
-    elbow.write(y2Map);
-    wrist.write(x2Map);
-  
-    delay(10);
+
+    if (sw7v == HIGH && pressed == false){
+      pressed = true;
+      delay(20);
+    }
+    else if (sw7v == HIGH && pressed == true){
+      pressed = false; 
+      delay(20);
+    }
+
+    if (pressed == false){
+      base.write(x1Map);
+      shoulder.write(y1Map);
+      elbow.write(y2Map);
+      wrist.write(x2Map);
+      baseV = x1Map;
+      shoulderV = y1Map;
+      elbowV = y2Map;
+      wristV = x2Map;
+    }
+
+    else if(pressed == true){
+      base.write(baseV);
+      shoulder.write(shoulderV);
+      elbow.write(elbowV);
+      wrist.write(wristV);
+    }
+
+    // code for the rest of the 4 servos to be controlled with the buttons.
+    Serial.println(pressed);
+    delay(20);
   }
 
   while (mode == 1){ // learn mode
