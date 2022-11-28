@@ -79,3 +79,4 @@ void loop() {
 
 
 // one button registers the values of all joysticks when the button is pressed so the joystick can be released for other inputs.
+// add one more button for stopping the other servos that are controlled by the buttons
