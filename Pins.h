@@ -35,13 +35,19 @@ void setup() {
   pinMode(sw6, INPUT);
   pinMode(sw7, INPUT);
   shoulder.attach(8);
-  elbow.attach(9);
-  wrist.attach(10);
-  wristrot.attach(11);
-  thumb.attach(12);
-  index.attach(13);
+  base.attach(9);
+  elbow.attach(10);
+  wrist.attach(11);
+  wristrot.attach(12);
+  thumb.attach(13);
+  index.attach(14);
   midfing.attach(15);
-  base.attach(16);
+
+  wristrot.write(0);
+  thumb.write(0);
+  index.write(0);
+  midfing.write(0);
+  
   
   Serial.begin(9600);
 }
