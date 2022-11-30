@@ -16,7 +16,9 @@ bool modepresd = false; // boolean to store if button 6 was pressed or not.
 int wristpos =  90;
 
 void loop() {
-  if (sw7 == HIGH){
+  int modebtnv = digitalRead(sw6);
+  
+  if (modebtnv == HIGH){
     if (mode <= 1){
       mode += 1;
     }
@@ -24,8 +26,10 @@ void loop() {
       mode = 0;
     }
   }
-  
+  Serial.println(mode);
+  delay(2000);
   while (mode == 0){  // follow mode
+    Serial.println("follow");
     // reading joystick values:
     int x1 = analogRead(j1x);
     int y1 = analogRead(j1y);
@@ -36,7 +40,6 @@ void loop() {
     int midfingv = digitalRead(sw3);
     int wristpm = digitalRead(sw4);   // wrist position minus
     int wristpp = digitalRead(sw5);   // wrist position plus
-    int modebtnv = digitalRead(sw6);
     int sw7v = digitalRead(sw7);
     delay(20);
 
@@ -118,14 +121,6 @@ void loop() {
         midfing.write(90);
       }
     }
-////    modebtn
-//    if (modebtnv == 1 && modepresd == false){
-//      modepresd = true;
-//    }
-//    else if (modebtnv == 1 && modepresd == true){
-//      modepresd = false;
-//    }
-    
 
 // left right (wrist rotation
     if (wristpm == 1){
@@ -139,15 +134,23 @@ void loop() {
     }
     wristrot.write(wristpos);
 
+
+    if(modebtnv == HIGH){
+      mode = 1;
+      Serial.println("break");
+      break;
+    }
     
 //    Serial.println(pressed);
     delay(20);
   }
 
   while (mode == 1){ // learn mode
+    Serial.println("learn");
     
+    if (modebtnv == HIGH){
+      mode = 0;
+      break;
+    }
   }
 }
-
-
-// one button registers the values of all joysticks when the button is pressed so the joystick can be released for other inputs.
