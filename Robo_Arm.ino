@@ -14,7 +14,7 @@ bool midpresd = false; // boolean to store if button 3 was pressed or not.
 bool modepresd = false; // boolean to store if button 6 was pressed or not.
 
 int wristpos =  90;
-
+int basepos = 90;
 void loop() {
   int modebtnv = digitalRead(sw6);
   
@@ -44,10 +44,10 @@ void loop() {
     delay(20);
 
 //Mapping Joysticks
-    x1Map = map(x1, 0, 1023, 0, 180); 
-    y1Map = map(y1, 0, 1023, 0, 180);
-    x2Map = map(x2, 0, 1023, 0, 180);  // 0, 1023, 0, 255 ; 0, 1023, 0, 180
-    y2Map = map(y2, 0, 1023, 0, 180);
+    x1Map = map(x1, 0, 1023, 0, 20); 
+    y1Map = map(y1, 0, 1023, 0, 20);
+    x2Map = map(x2, 0, 1023, 0, 20);  // 0, 1023, 0, 255 ; 0, 1023, 0, 180
+    y2Map = map(y2, 0, 1023, 0, 20);
     Serial.println((String) " x1: " + x1Map + " | y1: " + y1Map + " | x2: " + x2Map + " | y2: " + y2Map + " | sw1: " + thumbv + " | sw2: " + indexv + " | sw3: " + midfingv + " | sw4: " + wristpm + " | sw5: " + wristpp + " | sw6: " + modebtnv + " | sw7: " + sw7v);
 
 
@@ -60,23 +60,25 @@ void loop() {
       delay(20);
     }
 
-    if (pressed == false){
-      base.write(x1Map);
-      shoulder.write(y1Map);
-      elbow.write(y2Map);
-      wrist.write(x2Map);
-      baseV = x1Map;
-      shoulderV = y1Map;
-      elbowV = y2Map;
-      wristV = x2Map;
-    }
+    if(
 
-    else if(pressed == true){
-      base.write(baseV);
-      shoulder.write(shoulderV);
-      elbow.write(elbowV);
-      wrist.write(wristV);
-    }
+//    if (pressed == false){
+//      base.write(x1Map);
+//      shoulder.write(y1Map);
+//      elbow.write(y2Map);
+//      wrist.write(x2Map);
+//      baseV = x1Map;
+//      shoulderV = y1Map;
+//      elbowV = y2Map;
+//      wristV = x2Map;
+//    }
+//
+//    else if(pressed == true){
+//      base.write(baseV);
+//      shoulder.write(shoulderV);
+//      elbow.write(elbowV);
+//      wrist.write(wristV);
+//    }
 
     // code for the rest of the 4 servos to be controlled with the buttons. 
     // put this in a function
