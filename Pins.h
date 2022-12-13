@@ -11,6 +11,11 @@
 #define sw5 6   // button 5 pin 6
 #define sw6 7   // button 6 pin 7
 #define sw7 22  // button 7 pin 22
+#define pt1 23  // potentiometer pin 23 
+#define pt2 24  // potentiometer pin 24
+#define pt3 25  // potentiometer pin 25
+#define pt4 26  // potentiometer pin 26
+
 
 Servo base;     // base
 Servo shoulder; // shoulder
