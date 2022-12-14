@@ -1,7 +1,7 @@
 #include "Pins.h"
 #include "Functions.cpp"
 
-int x1Map, y1Map, x2Map, y2Map;  // variable for maping the values from the joystick
+int x1Map, y1Map, x2Map, y2Map, thumbMap, indexMap, midfingMap, wristMap;  // variable for maping the values from the joystick
 
 int baseV, shoulderV, elbowV, wristV;  // variables to store the values after store button is pressed.
 
@@ -40,6 +40,10 @@ void loop() {
       int y1 = analogRead(j1y);
       int x2 = analogRead(j2x);
       int y2 = analogRead(j2y);
+      int thumbjv = analogRead(pt1);
+      int indexjv = analogRead(pt2);
+      int midfingjv = analogRead(pt3);
+      int wristrotjv = analogRead(pt4);
       int thumbv = digitalRead(sw1);
       int indexv = digitalRead(sw2);
       int midfingv = digitalRead(sw3);
@@ -53,6 +57,10 @@ void loop() {
       y1Map = map(y1, 0, 1023, -40, 40);
       x2Map = map(x2, 0, 1023, -40, 40);  // 0, 1023, 0, 255 ; 0, 1023, 0, 180
       y2Map = map(y2, 0, 1023, -40, 40);
+      thumbMap = map(thumbjv, 0, 1023, 0, 180); 
+      indexMap = map(indexjv, 0, 1023, 0, 180);
+      midfingMap = map(midfingjv, 0, 1023, 0, 180);  // 0, 1023, 0, 255 ; 0, 1023, 0, 180
+      wristMap = map(wristrotjv, 0, 1023, 0, 180);
       Serial.println((String) " x1: " + x1Map + " | y1: " + y1Map + " | x2: " + x2Map + " | y2: " + y2Map + " | sw1: " + thumbv + " | sw2: " + indexv + " | sw3: " + midfingv + " | sw4: " + wristpm + " | sw5: " + wristpp + " | sw6: " + modebtnv + " | sw7: " + sw7v);
   
       if(x1Map > 1){basepos = basepos + x1Map;}
@@ -89,10 +97,18 @@ void loop() {
       shoulder.write(shoulderpos);
       elbow.write(elbowpos);
       wrist.write(wristjointpos);
+//      thumb.write(thumbMap);
+//      index.write(indexMap);
+//      midfing.write(midfingMap);
+//      wristrot.write(wristMap);
 
-    // code for the rest of the 4 servos to be controlled with the buttons. 
-    // put this in a function
-      if (thumbv == 1 && thumbpresd == false){
+    // code for the rest of the 4 servos to be controlled with the buttons and potentiometers. 
+//    thumb
+
+      if (thumbv != 1){
+        thumb.write(thumbMap);
+      }
+      else if (thumbv == 1 && thumbpresd == false){
         thumbpresd = true;
         if(thumbpresd == true){
           thumb.write(0);
@@ -104,8 +120,15 @@ void loop() {
           thumb.write(90);
         }
       }
+//      else{
+//        thumb.write(thumbMap);
+//      }
+      
 //    index
-      if (indexv == 1 && indexpresd == false){
+      if (indexv != 1){
+        index.write(indexMap);
+      }
+       else if (indexv == 1 && indexpresd == false){
         indexpresd = true;
         if(indexpresd == true){
           index.write(0);
@@ -117,8 +140,15 @@ void loop() {
           index.write(90);
         }
       }
+//      else{
+//        index.write(indexMap);
+//      }
+      
 //    midfing
-      if (midfingv == 1 && midpresd == false){
+      if (midfingv != 1){
+        midfing.write(midfingMap);
+      }
+      else if (midfingv == 1 && midpresd == false){
         midpresd = true;
         if(midpresd == true){
           midfing.write(0);
@@ -130,19 +160,16 @@ void loop() {
           midfing.write(90);
         } 
       }
+//      else{
+//        midfing.write(midfingMap);
+//      }
   
 // left right wrist rotation
-      if (wristpm == 1){
-        wristpos -= 3;
-      } 
-      else if (wristpp == 1){
-        wristpos += 3;
-      } 
-      else{
-        wristpos = wristpos;
-      } 
-      wristrot.write(wristpos);
+      if (wristpm && wristpp != 1){wristrot.write(wristMap);}
+      else if (wristpm == 1){wristrot.write(0);} // rotates counter clockwise
+      else if (wristpp == 1){wristrot.write(180);} // rotates clockwise
 
+// 
       modebtnv = digitalRead(sw6);
       if(modebtnv == HIGH){
         modepresd = true;
@@ -151,6 +178,7 @@ void loop() {
         mode = 1;
         break;
       }
+      
     
 //    Serial.println(pressed);
       delay(10);
@@ -160,7 +188,7 @@ void loop() {
   else if ( mode == 1){
     while (mode == 1){ // learn mode
       Serial.println("learn");
-      
+
       if (modebtnv == HIGH){
         mode = 0;
         break;
