@@ -1,4 +1,4 @@
 # Robotic Arm With Arduino Mega
 
-Currently only taking inputs.<br>
-Working on outputs, designing the arm.
+Works in the follow mode.
+Still working on the learn and repeat mode.
