@@ -1,5 +1,5 @@
 #include "Pins.h"
-#include "Functions.cpp"
+//#include "Functions.cpp"
 
 int x1Map, y1Map, x2Map, y2Map, thumbMap, indexMap, midfingMap, wristMap;  // variable for maping the values from the joystick
 
@@ -97,79 +97,79 @@ void loop() {
       shoulder.write(shoulderpos);
       elbow.write(elbowpos);
       wrist.write(wristjointpos);
-//      thumb.write(thumbMap);
-//      index.write(indexMap);
-//      midfing.write(midfingMap);
-//      wristrot.write(wristMap);
+      thumb.write(thumbMap);
+      index.write(indexMap);
+      midfing.write(midfingMap);
+      wristrot.write(wristMap);
 
     // code for the rest of the 4 servos to be controlled with the buttons and potentiometers. 
 //    thumb
-
-      if (thumbv != 1){
-        thumb.write(thumbMap);
-      }
-      else if (thumbv == 1 && thumbpresd == false){
-        thumbpresd = true;
-        if(thumbpresd == true){
-          thumb.write(0);
-        }
-      }
-      else if (thumbv == 1 && thumbpresd == true){
-        thumbpresd = false;
-        if(thumbpresd == false){
-          thumb.write(90);
-        }
-      }
-//      else{
+//
+//      if (thumbv != 1){
 //        thumb.write(thumbMap);
 //      }
-      
-//    index
-      if (indexv != 1){
-        index.write(indexMap);
-      }
-       else if (indexv == 1 && indexpresd == false){
-        indexpresd = true;
-        if(indexpresd == true){
-          index.write(0);
-        }
-      }
-      else if (indexv == 1 && indexpresd == true){
-        indexpresd = false;
-        if(indexpresd == false){
-          index.write(90);
-        }
-      }
-//      else{
+//      else if (thumbv == 1 && thumbpresd == false){
+//        thumbpresd = true;
+//        if(thumbpresd == true){
+//          thumb.write(0);
+//        }
+//      }
+//      else if (thumbv == 1 && thumbpresd == true){
+//        thumbpresd = false;
+//        if(thumbpresd == false){
+//          thumb.write(90);
+//        }
+//      }
+////      else{
+////        thumb.write(thumbMap);
+////      }
+//      
+////    index
+//      if (indexv != 1){
 //        index.write(indexMap);
 //      }
-      
-//    midfing
-      if (midfingv != 1){
-        midfing.write(midfingMap);
-      }
-      else if (midfingv == 1 && midpresd == false){
-        midpresd = true;
-        if(midpresd == true){
-          midfing.write(0);
-        }
-      }
-      else if (midfingv == 1 && midpresd == true){
-        midpresd = false;
-        if(midpresd == false){
-          midfing.write(90);
-        } 
-      }
-//      else{
+//       else if (indexv == 1 && indexpresd == false){
+//        indexpresd = true;
+//        if(indexpresd == true){
+//          index.write(0);
+//        }
+//      }
+//      else if (indexv == 1 && indexpresd == true){
+//        indexpresd = false;
+//        if(indexpresd == false){
+//          index.write(90);
+//        }
+//      }
+////      else{
+////        index.write(indexMap);
+////      }
+//      
+////    midfing
+//      if (midfingv != 1){
 //        midfing.write(midfingMap);
 //      }
-  
-// left right wrist rotation
-      if (wristpm && wristpp != 1){wristrot.write(wristMap);}
-      else if (wristpm == 1){wristrot.write(0);} // rotates counter clockwise
-      else if (wristpp == 1){wristrot.write(180);} // rotates clockwise
-
-// 
+//      else if (midfingv == 1 && midpresd == false){
+//        midpresd = true;
+//        if(midpresd == true){
+//          midfing.write(0);
+//        }
+//      }
+//      else if (midfingv == 1 && midpresd == true){
+//        midpresd = false;
+//        if(midpresd == false){
+//          midfing.write(90);
+//        } 
+//      }
+////      else{
+////        midfing.write(midfingMap);
+////      }
+//  
+//// left right wrist rotation
+//      if (wristpm && wristpp != 1){wristrot.write(wristMap);}
+//      else if (wristpm == 1){wristrot.write(0);} // rotates counter clockwise
+//      else if (wristpp == 1){wristrot.write(180);} // rotates clockwise
+//
+//// 
       modebtnv = digitalRead(sw6);
       if(modebtnv == HIGH){
         modepresd = true;
