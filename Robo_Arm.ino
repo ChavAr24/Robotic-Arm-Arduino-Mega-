@@ -81,8 +81,8 @@ void loop() {
       else if (basepos>180){basepos = 180;}
       else {basepos = basepos;}
 
-      if (shoulderpos<0){shoulderpos = 0;}
-      else if (shoulderpos>180){shoulderpos = 180;}
+      if (shoulderpos<35){shoulderpos = 35;}
+      else if (shoulderpos>145){shoulderpos = 145;}
       else {shoulderpos = shoulderpos;}
 
       if (elbowpos<0){elbowpos = 0;}
@@ -102,74 +102,6 @@ void loop() {
       midfing.write(midfingMap);
       wristrot.write(wristMap);
 
-    // code for the rest of the 4 servos to be controlled with the buttons and potentiometers. 
-//    thumb
-//
-//      if (thumbv != 1){
-//        thumb.write(thumbMap);
-//      }
-//      else if (thumbv == 1 && thumbpresd == false){
-//        thumbpresd = true;
-//        if(thumbpresd == true){
-//          thumb.write(0);
-//        }
-//      }
-//      else if (thumbv == 1 && thumbpresd == true){
-//        thumbpresd = false;
-//        if(thumbpresd == false){
-//          thumb.write(90);
-//        }
-//      }
-////      else{
-////        thumb.write(thumbMap);
-////      }
-//      
-////    index
-//      if (indexv != 1){
-//        index.write(indexMap);
-//      }
-//       else if (indexv == 1 && indexpresd == false){
-//        indexpresd = true;
-//        if(indexpresd == true){
-//          index.write(0);
-//        }
-//      }
-//      else if (indexv == 1 && indexpresd == true){
-//        indexpresd = false;
-//        if(indexpresd == false){
-//          index.write(90);
-//        }
-//      }
-////      else{
-////        index.write(indexMap);
-////      }
-//      
-////    midfing
-//      if (midfingv != 1){
-//        midfing.write(midfingMap);
-//      }
-//      else if (midfingv == 1 && midpresd == false){
-//        midpresd = true;
-//        if(midpresd == true){
-//          midfing.write(0);
-//        }
-//      }
-//      else if (midfingv == 1 && midpresd == true){
-//        midpresd = false;
-//        if(midpresd == false){
-//          midfing.write(90);
-//        } 
-//      }
-////      else{
-////        midfing.write(midfingMap);
-////      }
-//  
-//// left right wrist rotation
-//      if (wristpm && wristpp != 1){wristrot.write(wristMap);}
-//      else if (wristpm == 1){wristrot.write(0);} // rotates counter clockwise
-//      else if (wristpp == 1){wristrot.write(180);} // rotates clockwise
-//
-//// 
       modebtnv = digitalRead(sw6);
       if(modebtnv == HIGH){
         modepresd = true;
