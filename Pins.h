@@ -53,7 +53,7 @@ void setup() {
   thumb.attach(13);
   index.attach(14);
   midfing.attach(15);
-
+  
   wristrot.write(0);
   thumb.write(0);
   index.write(0);

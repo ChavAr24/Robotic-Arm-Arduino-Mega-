@@ -1,6 +1,6 @@
 /*
 Name: Aryan Chavan
-Date: November 2022
+Date: 22 November 2022
 Last update: 12 December 2021
 Project: Robotic Arm with Arduino Mega
 */
